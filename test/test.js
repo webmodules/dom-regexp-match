@@ -2,7 +2,7 @@
 var match = require('../');
 var assert = require('assert');
 
-describe('element-regexp-match', function () {
+describe('dom-regexp-match', function () {
 
   it('should match /foo/ in a DIV', function () {
     var el = document.createElement('div');
@@ -92,7 +92,7 @@ describe('element-regexp-match', function () {
     el.innerHTML = 'f\\o bar f\\o';
 
     assert.equal(0, count);
-    match(el, "f\\o", function (m, range) {
+    match(el, 'f\\o', function (m, range) {
       assert.equal('f\\o', range.toString());
       count++;
     });
@@ -105,7 +105,7 @@ describe('element-regexp-match', function () {
     el.innerHTML = 'foo foo foo';
 
     assert.equal(0, count);
-    match(el, "foo", function (m, range) {
+    match(el, 'foo', function (m, range) {
       count++;
       assert.equal('foo', range.toString());
       range.deleteContents();
