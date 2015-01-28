@@ -1,0 +1,37 @@
+{
+  "name": "element-regexp-match",
+  "version": "0.0.0",
+  "description": "Creates Range instances within an HTML Element that select text matching a RegExp",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/webmodules/element-regexp-match.git"
+  },
+  "keywords": [
+    "browser",
+    "node",
+    "element",
+    "regexp",
+    "match",
+    "exec",
+    "replace",
+    "range"
+  ],
+  "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webmodules/element-regexp-match/issues"
+  },
+  "homepage": "https://github.com/webmodules/element-regexp-match",
+  "dependencies": {
+    "dom-iterator": "~0.3.0",
+    "escape-string-regexp": "~1.0.2",
+    "get-document": "~1.0.0"
+  },
+  "devDependencies": {
+    "zuul": "~1.16.3"
+  }
+}
