@@ -18,7 +18,7 @@ module.exports = match;
  *
  * @param {Element} parent
  * @param {String|Regex} regexp
- * @param {String|Element|Function} fn
+ * @param {Function} fn
  */
 
 function match (parent, regexp, fn) {
@@ -30,7 +30,7 @@ function match (parent, regexp, fn) {
   // "string" support
   regexp = regexp.source ? regexp : new RegExp(escapeRegexp(regexp));
 
-  while (m = regexp.exec(parent.textContent)) {
+  while (m = regexp.exec(text)) {
     var it = new DomIterator(parent.firstChild, parent)
       .select(3 /* text node */)
       .revisit(false);
