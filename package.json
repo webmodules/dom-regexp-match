@@ -1,6 +1,6 @@
 {
   "name": "dom-regexp-match",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Creates Range instances within an HTML Element that select text matching a RegExp",
   "main": "index.js",
   "scripts": {
