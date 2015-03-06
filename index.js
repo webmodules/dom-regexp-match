@@ -3,8 +3,7 @@
  * Module dependencies
  */
 
-var DomIterator = require('dom-iterator');
-var getDocument = require('get-document');
+var RangeAtIndex = require('range-at-index');
 var escapeRegexp = require('escape-string-regexp');
 
 /**
@@ -16,65 +15,27 @@ module.exports = match;
 /**
  * Initialize `match`
  *
- * @param {Element} parent
+ * @param {Element} el
  * @param {String|Regex} regexp
  * @param {Function} fn
  */
 
-function match (parent, regexp, fn) {
-  var m;
-  var range;
-  var doc = getDocument(parent);
-  var text = parent.textContent;
+function match (el, regexp, fn) {
+  var m, range;
+  var text = el.textContent;
 
   // "string" support
   regexp = regexp.source ? regexp : new RegExp(escapeRegexp(regexp));
 
   while (m = regexp.exec(text)) {
-    var it = new DomIterator(parent.firstChild, parent)
-      .select(3 /* text node */)
-      .revisit(false);
-
     var index = m.index;
     var offset = m.index + m[0].length;
-    var node = it.node;
-    var start = {};
-    var end = {};
-    var val, len;
 
-    // ensure node is a textnode
-    //
-    // TODO: figure out a better way to do this
-    // within dom-iterator
-    node = 3 == node.nodeType ? node : it.next();
-
-    while (node) {
-      val = node.nodeValue;
-      len = val.length;
-
-      if (!start.node && len > index) {
-        start.node = node;
-        start.offset = index;
-      }
-
-      if (!end.node && len >= offset) {
-        end.node = node;
-        end.offset = offset;
-      }
-
-      index -= len;
-      offset -= len;
-      node = it.next();
-    }
-
-    // create the range from the start and end offsets
-    range = doc.createRange();
-    range.setStart(start.node, start.offset);
-    range.setEnd(end.node, end.offset);
+    range = RangeAtIndex(el, index, offset);
 
     // invoke fn
     var before = range.toString();
-    fn.call(parent, m, range);
+    fn.call(el, m, range);
 
     // if the RegExp doesn't have the "global" flag then bail,
     // to avoid an infinite loop
@@ -85,9 +46,9 @@ function match (parent, regexp, fn) {
     var diff = range.toString().length - before.length;
     if (diff !== 0) {
       regexp.lastIndex += diff;
-      text = parent.textContent;
+      text = el.textContent;
     }
   }
 
-  return parent;
+  return el;
 }
