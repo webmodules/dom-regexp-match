@@ -28,7 +28,7 @@
   "homepage": "https://github.com/webmodules/dom-regexp-match",
   "dependencies": {
     "escape-string-regexp": "~1.0.2",
-    "range-at-index": "~1.0.3"
+    "range-at-index": "~1.0.4"
   },
   "devDependencies": {
     "zuul": "2"
